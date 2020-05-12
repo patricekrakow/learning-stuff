@@ -1,6 +1,7 @@
 # Playing with Kafka
 
 <https://kafka.apache.org/intro>
+
 <https://kafka.apache.org/quickstart>
 
 ## Let's start the cluster with a single node (server)
