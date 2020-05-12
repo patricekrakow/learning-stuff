@@ -15,5 +15,4 @@ $ curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64
 ```
 [~/environment]
 $ chmod 755 ./opa
-...
 ```
