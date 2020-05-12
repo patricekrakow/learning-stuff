@@ -1,5 +1,7 @@
 # Playing with MongoDB
 
+<https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/>
+
 Issue the command `lsb_release -dc` to be sure you are running **Ubuntu 18.04 (Bionic)**:
 
 ```
