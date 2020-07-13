@@ -58,3 +58,59 @@ You can check that your _VM_ is actually supporting virtualization by running th
 ```
 user@Azure:~$ grep -E --color 'vmx|svm' /proc/cpuinfo
 ```
+
+## Install VirtualBox as Hypervisor
+
+<https://www.virtualbox.org/wiki/Linux_Downloads>
+
+First of all, you should get the version of Ubuntu with the following command:
+```
+radicel@minikube-01:~$ lsb_release -a
+```
+
+Add the following line to your `/etc/apt/sources.list` file.
+```
+deb [arch=amd64] https://download.virtualbox.org/virtualbox/debian <mydist> contrib
+```
+where `<mydist>` should be replaced by replace with `eoan`, `bionic`, `xenial`, buster`, `stretch`, or `jessie` according to your version.
+
+```
+radicel@minikube-01:~$ wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
+radicel@minikube-01:~$ wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
+```
+
+```
+radicel@minikube-01:~$ sudo apt-get update
+radicel@minikube-01:~$ sudo apt-get install virtualbox-6.1
+```
+
+## Install `kubectl`
+
+```
+radicel@minikube-01:~$ curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+radicel@minikube-01:~$ chmod +x ./kubectl
+radicel@minikube-01:~$ sudo mv ./kubectl /usr/local/bin/kubectl
+radicel@minikube-01:~$ kubectl version --client
+```
+
+## Install Minikube
+
+<https://kubernetes.io/docs/tasks/tools/install-minikube/>
+
+```
+radicel@minikube-01:~$ curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+radicel@minikube-01:~$ chmod +x minikube
+radicel@minikube-01:~$ sudo mkdir -p /usr/local/bin/
+radicel@minikube-01:~$ sudo install minikube /usr/local/bin/
+```
+
+```
+radicel@minikube-01:~$ minikube version
+radicel@minikube-01:~$ minikube status
+```
+
+## Start Minikube
+
+```
+radicel@minikube-01:~$ minikube start --memory=16384 --cpus=4
+```
