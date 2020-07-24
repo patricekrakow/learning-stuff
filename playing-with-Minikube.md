@@ -80,8 +80,8 @@ radicel@minikube-01:~$ wget -q https://www.virtualbox.org/download/oracle_vbox.a
 ```
 
 ```
-radicel@minikube-01:~$ sudo apt-get update
-radicel@minikube-01:~$ sudo apt-get install virtualbox-6.1
+radicel@minikube-01:~$ sudo apt-get -y update
+radicel@minikube-01:~$ sudo apt-get -y install virtualbox-6.1
 ```
 
 ## Install `kubectl`
@@ -113,4 +113,51 @@ radicel@minikube-01:~$ minikube status
 
 ```
 radicel@minikube-01:~$ minikube start --memory=16384 --cpus=4
+```
+
+## Configure NGINX to access the Kubernetes Cluster
+
+```
+radicel@minikube-01:~$ minikube dashboard --url=true
+```
+```
+🤔  Verifying dashboard health ...
+🚀  Launching proxy ...
+🤔  Verifying proxy health ...
+http://127.0.0.1:43633/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/
+```
+
+Create the `kubernets-ui.conf` NGINX configuration file:
+
+```
+radicel@minikube-01:~$ vi kubernetes-ui.conf
+```
+
+```nginx
+server {
+  listen 80;
+  server_name kubernetes.mydomain.net;
+
+  location / {
+    proxy_pass http://127.0.0.1:43633/;
+  }
+}
+```
+where you have to change the port `43633` to the value you get back from `$ minikube dashboard --url=true`.
+
+```
+radicel@minikube-01:~$ sudo mv kubernetes-ui.conf /etc/nginx/sites-available
+radicel@minikube-01:~$ sudo rm /etc/nginx/sites-enabled/default
+radicel@minikube-01:~$ sudo ln -s /etc/nginx/sites-available/kubernetes-ui.conf /etc/nginx/sites-enabled/kubernetes-ui.conf
+radicel@minikube-01:~$ sudo service nginx configtest
+radicel@minikube-01:~$ sudo service nginx reload
+radicel@minikube-01:~$ sudo service nginx status
+```
+
+## Install Helm
+
+```
+radicel@minikube-01:~$ curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+radicel@minikube-01:~$ chmod 700 get_helm.sh
+radicel@minikube-01:~$ ./get_helm.sh
 ```
