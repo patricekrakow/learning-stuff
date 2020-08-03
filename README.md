@@ -1,5 +1,7 @@
-# learning-stuff
-Let's have one repo with all my learning experiences
+# Learning Stuff
+Let's have one repository with all my learning experiences:
+
+[Playing with Azure Kubernetes Service (AKS)](playing-with-AKS) | Azure Kubernetes Service is the quickest path from zero to Kubernetes on Azure.
 
 [Playing with Kafka](playing-with-Kafka.md) | Apache Kafka® is a distributed streaming platform.
 
