@@ -81,6 +81,58 @@ zipkin-5dbc54795f-8ngvk           1/1     Running   0          5m31s
 ```
 </details>
 
+## Install the Demo
+
+1\. Deploy the `service-a` using the following command:
+```
+$ kubectl apply -f https://raw.githubusercontent.com/patricekrakow/learning-microservices/master/demo/service-a~v1.0.0/service-a.yaml
+```
+<details><summary>Output the command</summary>
+
+```
+...
+```
+</details>
+
+2\. Deploy the `client-x` using the following command:
+```
+$ kubectl apply -f https://raw.githubusercontent.com/patricekrakow/learning-microservices/master/demo/client-x~v1.0.0/client-x.yaml
+```
+<details><summary>Output the command</summary>
+
+```
+...
+```
+</details>
+
+```
+$ kubectl get pods -n demo-01
+```
+<details><summary>Output the command</summary>
+
+```
+NAME                                   READY   STATUS    RESTARTS   AGE
+client-x-deployment-59f9767657-g7vhc   1/1     Running   0          8m23s
+service-a-deployment-66d47877b-vhdxb   1/1     Running   0          44m
+```
+</details>
+
+```
+$ kubectl logs client-x-deployment-59f9767657-g7vhc -n demo-01
+```
+<details><summary>Output the command</summary>
+
+```
+[INFO] Hello from get /path-01 | service-a (1.0.0) | service-a-deployment-66d47877b-vhdxb
+[INFO] Hello from get /path-02 | service-a (1.0.0) | service-a-deployment-66d47877b-vhdxb
+[INFO] Hello from get /path-01 | service-a (1.0.0) | service-a-deployment-66d47877b-vhdxb
+[INFO] Hello from get /path-02 | service-a (1.0.0) | service-a-deployment-66d47877b-vhdxb
+...
+[INFO] Hello from get /path-01 | service-a (1.0.0) | service-a-deployment-66d47877b-vhdxb
+[INFO] Hello from get /path-02 | service-a (1.0.0) | service-a-deployment-66d47877b-vhdxb
+```
+</details>
+
 ## Onboard Services
 
 ```
@@ -117,34 +169,6 @@ spec:
   - kubernetes
 status:
   phase: Active
-```
-</details>
-
-```
-$ kubectl get pods -n demo-01
-```
-<details><summary>Output the command</summary>
-
-```
-NAME                                   READY   STATUS    RESTARTS   AGE
-client-x-deployment-59f9767657-g7vhc   1/1     Running   0          8m23s
-service-a-deployment-66d47877b-vhdxb   1/1     Running   0          44m
-```
-</details>
-
-```
-$ kubectl logs client-x-deployment-59f9767657-g7vhc -n demo-01
-```
-<details><summary>Output the command</summary>
-
-```
-[INFO] Hello from get /path-01 | service-a (1.0.0) | service-a-deployment-66d47877b-vhdxb
-[INFO] Hello from get /path-02 | service-a (1.0.0) | service-a-deployment-66d47877b-vhdxb
-[INFO] Hello from get /path-01 | service-a (1.0.0) | service-a-deployment-66d47877b-vhdxb
-[INFO] Hello from get /path-02 | service-a (1.0.0) | service-a-deployment-66d47877b-vhdxb
-...
-[INFO] Hello from get /path-01 | service-a (1.0.0) | service-a-deployment-66d47877b-vhdxb
-[INFO] Hello from get /path-02 | service-a (1.0.0) | service-a-deployment-66d47877b-vhdxb
 ```
 </details>
 
@@ -190,9 +214,82 @@ $ kubectl logs client-x-deployment-59f9767657-g7vhc -n demo-01
 ```
 </details>
 
+```
+$ kubectl delete pod client-x-deployment-59f9767657-g7vhc -n demo-01
+```
+<details><summary>Output the command</summary>
+
+```
+pod "client-x-deployment-59f9767657-g7vhc" deleted
+```
+</details>
+
+```
+$ kubectl get pods -n demo-01
+```
+<details><summary>Output the command</summary>
+
+```
+NAME                                    READY   STATUS    RESTARTS   AGE
+client-x-deployment-6dc67f6bdf-g7rgn    2/2     Running   0          4s
+service-a-deployment-5df87cc6bd-txknm   2/2     Running   0          49s
+```
+</details>
+
+```
+$ kubectl logs client-x-deployment-6dc67f6bdf-g7rgn client-x -n demo-01 | tail
+```
+<details><summary>Output the command</summary>
+
+```
+[INFO]
+[INFO]
+[INFO]
+[INFO]
+[INFO]
+[INFO]
+[INFO]
+[INFO]
+[INFO]
+[INFO]
+```
+</details>
+
 ## Allow Traffic with SMI
 
 ### Level 4
+
+```yaml
+# traffic.yaml
+---
+# Deploy the 'tcp-route' TCPRoute
+apiVersion: specs.smi-spec.io/v1alpha3
+kind: TCPRoute
+metadata:
+  name: tcp-route
+  namespace: demo-01
+spec: {}
+---
+# Deploy the 'allow-client-x-to-service-a' TrafficTarget
+kind: TrafficTarget
+apiVersion: access.smi-spec.io/v1alpha2
+metadata:
+  name: allow-client-x-to-service-a
+  namespace: demo-01
+spec:
+  destination:
+    kind: ServiceAccount
+    name: service-a
+    namespace: demo-01
+    port: 3000
+  rules:
+  - kind: TCPRoute
+    name: tcp-route
+  sources:
+  - kind: ServiceAccount
+    name: client-x
+    namespace: demo-01
+```
 
 ### Level 7
 
