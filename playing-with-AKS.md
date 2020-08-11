@@ -23,7 +23,7 @@ $ az account list-locations | jq .[].name
 ```
 </details>
 
-3\. Create an Azure _resource group_ called `group-01`using the following command:
+3\. Create an Azure _resource group_ called `group-01` using the following command:
 
 ```
 $ az group create --name group-01 --location francecentral
