@@ -291,7 +291,135 @@ spec:
     namespace: demo-01
 ```
 
+```
+$ kubectl apply -f traffic.yaml
+```
+<details><summary>Output the command</summary>
+
+```
+tcproute.specs.smi-spec.io/tcp-route created
+traffictarget.access.smi-spec.io/allow-client-x-to-service-a created
+```
+</details>
+
+```
+$ kubectl get TCPRoute -n demo-01
+```
+<details><summary>Output the command</summary>
+
+```
+NAME        AGE
+tcp-route   138m
+```
+</details>
+
+```
+$ kubectl get TrafficTarget -n demo-01
+```
+<details><summary>Output the command</summary>
+
+```
+NAME                          AGE
+allow-client-x-to-service-a   136m
+```
+</details>
+
+```
+$ kubectl logs client-x-deployment-6dc67f6bdf-g7rgn client-x -n demo-01 | tail
+```
+<details><summary>Output the command</summary>
+
+**It does NOT work :-(**
+```
+[INFO]
+[INFO]
+[INFO]
+[INFO]
+[INFO]
+[INFO]
+[INFO]
+[INFO]
+[INFO]
+[INFO]
+```
+</details>
+
 ### Level 7
+
+```yaml
+# traffic.yaml
+---
+# Deploy the 'service-a-routes' HTTPRouteGroup
+apiVersion: specs.smi-spec.io/v1alpha3
+kind: HTTPRouteGroup
+metadata:
+  name: service-a-routes
+  namespace: demo-01
+spec:
+  matches:
+  - name: get-path-01
+    pathRegex: /path-01
+    methods:
+    - GET
+  - name: get-path-02
+    pathRegex: /path-02
+    methods:
+    - GET
+---
+# Deploy the 'allow-client-x-to-service-a' TrafficTarget
+kind: TrafficTarget
+apiVersion: access.smi-spec.io/v1alpha2
+metadata:
+  name: allow-client-x-to-service-a
+  namespace: demo-01
+spec:
+  destination:
+    kind: ServiceAccount
+    name: service-a
+    namespace: demo-01
+    port: 3000
+  rules:
+  - kind: HTTPRouteGroup
+    name: service-a-routes
+    matches:
+    - get-path-01
+    - get-path-02
+  sources:
+  - kind: ServiceAccount
+    name: client-x
+    namespace: demo-01
+```
+
+```
+$ kubectl apply -f traffic.yaml
+```
+<details><summary>Output the command</summary>
+
+```
+httproutegroup.specs.smi-spec.io/service-a-routes created
+traffictarget.access.smi-spec.io/allow-client-x-to-service-a created
+```
+</details>
+
+```
+$ kubectl logs client-x-deployment-6dc67f6bdf-g7rgn client-x -n demo-01 | tail
+```
+<details><summary>Output the command</summary>
+
+**It does NOT work :-(**
+```
+[INFO]
+[INFO]
+[INFO]
+[INFO]
+[INFO]
+[INFO]
+[INFO]
+[INFO]
+[INFO]
+[INFO]
+```
+</details>
 
 ## References
 
