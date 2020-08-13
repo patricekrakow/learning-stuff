@@ -26,15 +26,15 @@ $ az account list-locations | jq .[].name
 3\. Create an Azure _resource group_ called `group-01` using the following command:
 
 ```
-$ az group create --name group-01 --location francecentral
+$ az group create --name group-01 --location westeurope
 ```
-eventually replacing the value `francentral` by another value of your choice coming from the previous command.
+eventually replacing the value `westeurope` by another value of your choice coming from the previous command.
 <details><summary>Output the command</summary>
 
 ```json
 {
   "id": "/subscriptions/99999999-9999-9999-9999-999999999999/resourceGroups/group-01",
-  "location": "francecentral",
+  "location": "westeurope",
   "managedBy": null,
   "name": "group-01",
   "properties": {
