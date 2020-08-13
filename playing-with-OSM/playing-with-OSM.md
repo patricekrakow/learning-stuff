@@ -260,7 +260,7 @@ $ kubectl logs client-x-deployment-6dc67f6bdf-g7rgn client-x -n demo-01 | tail
 ### Level 4
 
 ```yaml
-# traffic.yaml
+# traffic.L4.yaml
 ---
 # Deploy the 'tcp-route' TCPRoute
 apiVersion: specs.smi-spec.io/v1alpha3
@@ -292,7 +292,7 @@ spec:
 ```
 
 ```
-$ kubectl apply -f traffic.yaml
+$ kubectl apply -f traffic.L4.yaml
 ```
 <details><summary>Output the command</summary>
 
@@ -347,7 +347,7 @@ $ kubectl logs client-x-deployment-6dc67f6bdf-g7rgn client-x -n demo-01 | tail
 ### Level 7
 
 ```yaml
-# traffic.yaml
+# traffic.L7.yaml
 ---
 # Deploy the 'service-a-routes' HTTPRouteGroup
 apiVersion: specs.smi-spec.io/v1alpha3
@@ -391,7 +391,7 @@ spec:
 ```
 
 ```
-$ kubectl apply -f traffic.yaml
+$ kubectl apply -f traffic.L7.yaml
 ```
 <details><summary>Output the command</summary>
 
@@ -433,3 +433,4 @@ $ kubectl logs client-x-deployment-6dc67f6bdf-g7rgn client-x -n demo-01 | tail
 
 <https://github.com/openservicemesh/osm/blob/main/DESIGN.md>
 
+<https://groups.google.com/g/openservicemesh/c/KdprhUJvKUE>
