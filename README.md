@@ -11,4 +11,4 @@ Let's have one repository with all my learning experiences:
 
 [Playing with OPA](playing-with-OPA.md) | The Open Policy Agent (OPA, pronounced “oh-pa”) is an open source, general-purpose policy engine that unifies policy enforcement across the stack.
 
-[Playing with OSM](playing-with-OSM.md) | Open Service Mesh (OSM) is a lightweight and extensible cloud native service mesh.
+[Playing with OSM](playing-with-OSM/playing-with-OSM.md) | Open Service Mesh (OSM) is a lightweight and extensible cloud native service mesh.
