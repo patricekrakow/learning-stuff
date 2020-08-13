@@ -4,33 +4,33 @@
 
 1\. Download platform specific compressed package from the [Releases page](https://github.com/openservicemesh/osm/releases) using the following command:
 ```
-$ wget https://github.com/openservicemesh/osm/releases/download/v0.2.0/osm-v0.2.0-linux-amd64.tar.gz
+$ wget https://github.com/openservicemesh/osm/releases/download/v0.3.0/osm-v0.3.0-linux-amd64.tar.gz
 ```
 <details><summary>Output the command</summary>
 
 ```
---2020-08-10 09:02:52--  https://github.com/openservicemesh/osm/releases/download/v0.2.0/osm-v0.2.0-linux-amd64.tar.gz
-Resolving github.com (github.com)... 192.30.255.112
-Connecting to github.com (github.com)|192.30.255.112|:443... connected.
+--2020-08-13 18:54:05--  https://github.com/openservicemesh/osm/releases/download/v0.3.0/osm-v0.3.0-linux-amd64.tar.gz
+Resolving github.com (github.com)... 140.82.118.4
+Connecting to github.com (github.com)|140.82.118.4|:443... connected.
 HTTP request sent, awaiting response... 302 Found
-Location: https://github-production-release-asset-2e65be.s3.amazonaws.com/227895834/29304500-d81a-11ea-84b8-6a3aca3de7c6?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20200810%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20200810T090252Z&X-Amz-Expires=300&X-Amz-Signature=20cf4d08211612ac8b45b9569a0a51d0ae125426f97280911d0f2b032e55fac6&X-Amz-SignedHeaders=host&actor_id=0&repo_id=227895834&response-content-disposition=attachment%3B%20filename%3Dosm-v0.2.0-linux-amd64.tar.gz&response-content-type=application%2Foctet-stream [following]
---2020-08-10 09:02:52--  https://github-production-release-asset-2e65be.s3.amazonaws.com/227895834/29304500-d81a-11ea-84b8-6a3aca3de7c6?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20200810%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20200810T090252Z&X-Amz-Expires=300&X-Amz-Signature=20cf4d08211612ac8b45b9569a0a51d0ae125426f97280911d0f2b032e55fac6&X-Amz-SignedHeaders=host&actor_id=0&repo_id=227895834&response-content-disposition=attachment%3B%20filename%3Dosm-v0.2.0-linux-amd64.tar.gz&response-content-type=application%2Foctet-stream
-Resolving github-production-release-asset-2e65be.s3.amazonaws.com (github-production-release-asset-2e65be.s3.amazonaws.com)... 52.216.227.176
-Connecting to github-production-release-asset-2e65be.s3.amazonaws.com (github-production-release-asset-2e65be.s3.amazonaws.com)|52.216.227.176|:443... connected.
+Location: https://github-production-release-asset-2e65be.s3.amazonaws.com/227895834/2e900280-dce6-11ea-815f-189771af1afa?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20200813%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20200813T185406Z&X-Amz-Expires=300&X-Amz-Signature=e72d1b482c53915fe46cbdeab76bbecfd7ca30f8a51702dfb6916a2e7d89f3c7&X-Amz-SignedHeaders=host&actor_id=0&repo_id=227895834&response-content-disposition=attachment%3B%20filename%3Dosm-v0.3.0-linux-amd64.tar.gz&response-content-type=application%2Foctet-stream [following]
+--2020-08-13 18:54:06--  https://github-production-release-asset-2e65be.s3.amazonaws.com/227895834/2e900280-dce6-11ea-815f-189771af1afa?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20200813%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20200813T185406Z&X-Amz-Expires=300&X-Amz-Signature=e72d1b482c53915fe46cbdeab76bbecfd7ca30f8a51702dfb6916a2e7d89f3c7&X-Amz-SignedHeaders=host&actor_id=0&repo_id=227895834&response-content-disposition=attachment%3B%20filename%3Dosm-v0.3.0-linux-amd64.tar.gz&response-content-type=application%2Foctet-stream
+Resolving github-production-release-asset-2e65be.s3.amazonaws.com (github-production-release-asset-2e65be.s3.amazonaws.com)... 52.216.25.92
+Connecting to github-production-release-asset-2e65be.s3.amazonaws.com (github-production-release-asset-2e65be.s3.amazonaws.com)|52.216.25.92|:443... connected.
 HTTP request sent, awaiting response... 200 OK
-Length: 22553127 (22M) [application/octet-stream]
-Saving to: ‘osm-v0.2.0-linux-amd64.tar.gz’
+Length: 22543737 (21M) [application/octet-stream]
+Saving to: ‘osm-v0.3.0-linux-amd64.tar.gz’
 
-osm-v0.2.0-linux-amd64.tar.gz        100%[===================================================================>]  21.51M  20.7MB/s    in 1.0s
+osm-v0.3.0-linux-amd64.tar.gz        100%[===================================================================>]  21.50M  18.3MB/s    in 1.2s
 
-2020-08-10 09:02:54 (20.7 MB/s) - ‘osm-v0.2.0-linux-amd64.tar.gz’ saved [22553127/22553127]
+2020-08-13 18:54:07 (18.3 MB/s) - ‘osm-v0.3.0-linux-amd64.tar.gz’ saved [22543737/22543737]
 ```
 </details>
 
 2\. Unpack the `osm` binary using the following command:
 
 ```
-$ tar -xzf osm-v0.2.0-linux-amd64.tar.gz
+$ tar -xzf osm-v0.3.0-linux-amd64.tar.gz
 $ cd linux-amd64/
 $ ls
 ```
@@ -49,7 +49,7 @@ $ osm version
 <details><summary>Output the command</summary>
 
 ```
-Version: v0.2.0; Commit: 3ec26b3; Date: 2020-08-06-19:19
+Version: v0.3.0; Commit: c91c782; Date: 2020-08-12-21:49
 ```
 </details>
 
@@ -73,11 +73,11 @@ $ kubectl get pods --namespace osm-system
 <details><summary>Output the command</summary>
 
 ```
-NAME                              READY   STATUS    RESTARTS   AGE
-osm-controller-57f9bdff7c-g8s2p   1/1     Running   0          5m31s
-osm-grafana-775c79f77-vm9sh       1/1     Running   0          5m31s
-osm-prometheus-d54f6f8b7-xnwhf    1/1     Running   0          5m31s
-zipkin-5dbc54795f-8ngvk           1/1     Running   0          5m31s
+NAME                             READY   STATUS    RESTARTS   AGE
+osm-controller-5778756dd-4tq88   1/1     Running   0          43s
+osm-grafana-775c79f77-6d6x9      1/1     Running   0          43s
+osm-prometheus-d54f6f8b7-m6g4f   1/1     Running   0          43s
+zipkin-5dbc54795f-pnbmm          1/1     Running   0          43s
 ```
 </details>
 
@@ -90,7 +90,10 @@ $ kubectl apply -f https://raw.githubusercontent.com/patricekrakow/learning-micr
 <details><summary>Output the command</summary>
 
 ```
-...
+namespace/demo-01 created
+serviceaccount/service-a created
+service/service-a-service created
+deployment.apps/service-a-deployment created
 ```
 </details>
 
@@ -101,7 +104,10 @@ $ kubectl apply -f https://raw.githubusercontent.com/patricekrakow/learning-micr
 <details><summary>Output the command</summary>
 
 ```
-...
+namespace/demo-01 unchanged
+serviceaccount/client-x created
+service/client-x-service created
+deployment.apps/client-x-deployment created
 ```
 </details>
 
@@ -111,25 +117,25 @@ $ kubectl get pods -n demo-01
 <details><summary>Output the command</summary>
 
 ```
-NAME                                   READY   STATUS    RESTARTS   AGE
-client-x-deployment-59f9767657-g7vhc   1/1     Running   0          8m23s
-service-a-deployment-66d47877b-vhdxb   1/1     Running   0          44m
+NAME                                    READY   STATUS    RESTARTS   AGE
+client-x-deployment-859f4b448f-8vwrw    1/1     Running   0          58s
+service-a-deployment-5df87cc6bd-swz29   1/1     Running   0          117s
 ```
 </details>
 
 ```
-$ kubectl logs client-x-deployment-59f9767657-g7vhc -n demo-01
+$ kubectl logs client-x-deployment-859f4b448f-8vwrw -n demo-01 | tail
 ```
 <details><summary>Output the command</summary>
 
 ```
-[INFO] Hello from get /path-01 | service-a (1.0.0) | service-a-deployment-66d47877b-vhdxb
-[INFO] Hello from get /path-02 | service-a (1.0.0) | service-a-deployment-66d47877b-vhdxb
-[INFO] Hello from get /path-01 | service-a (1.0.0) | service-a-deployment-66d47877b-vhdxb
-[INFO] Hello from get /path-02 | service-a (1.0.0) | service-a-deployment-66d47877b-vhdxb
+[INFO] Hello from get /path-01 | service-a (1.0.0) | service-a-deployment-5df87cc6bd-swz29
+[INFO] Hello from get /path-02 | service-a (1.0.0) | service-a-deployment-5df87cc6bd-swz29
+[INFO] Hello from get /path-01 | service-a (1.0.0) | service-a-deployment-5df87cc6bd-swz29
+[INFO] Hello from get /path-02 | service-a (1.0.0) | service-a-deployment-5df87cc6bd-swz29
 ...
-[INFO] Hello from get /path-01 | service-a (1.0.0) | service-a-deployment-66d47877b-vhdxb
-[INFO] Hello from get /path-02 | service-a (1.0.0) | service-a-deployment-66d47877b-vhdxb
+[INFO] Hello from get /path-01 | service-a (1.0.0) | service-a-deployment-5df87cc6bd-swz29
+[INFO] Hello from get /path-02 | service-a (1.0.0) | service-a-deployment-5df87cc6bd-swz29
 ```
 </details>
 
@@ -157,13 +163,13 @@ metadata:
   annotations:
     kubectl.kubernetes.io/last-applied-configuration: |
       {"apiVersion":"v1","kind":"Namespace","metadata":{"annotations":{},"name":"demo-01"}}
-  creationTimestamp: "2020-08-11T15:07:43Z"
+  creationTimestamp: "2020-08-13T19:00:00Z"
   labels:
     openservicemesh.io/monitored-by: osm
   name: demo-01
-  resourceVersion: "167551"
+  resourceVersion: "2616"
   selfLink: /api/v1/namespaces/demo-01
-  uid: 2f360ec1-74fa-49b7-8bd3-72bb2145380e
+  uid: 67dc9e7f-9f0c-4e84-903b-b72d7a64c7c7
 spec:
   finalizers:
   - kubernetes
@@ -173,54 +179,38 @@ status:
 </details>
 
 ```
-$ kubectl delete pod service-a-deployment-66d47877b-vhdxb -n demo-01
+$ kubectl logs client-x-deployment-859f4b448f-8vwrw -n demo-01 | tail
 ```
 <details><summary>Output the command</summary>
 
 ```
-pod "service-a-deployment-66d47877b-vhdxb" deleted
-```
-</details>
-
-```
-$ kubectl get pods -n demo-01
-```
-<details><summary>Output the command</summary>
-
-```
-NAME                                   READY   STATUS    RESTARTS   AGE
-client-x-deployment-59f9767657-g7vhc   1/1     Running   0          12m
-service-a-deployment-66d47877b-s7m2v   2/2     Running   0          17s
-```
-</details>
-
-```
-$ kubectl logs client-x-deployment-59f9767657-g7vhc -n demo-01
-```
-<details><summary>Output the command</summary>
-
-```
-[INFO] Hello from get /path-01 | service-a (1.0.0) | service-a-deployment-66d47877b-vhdxb
-[INFO] Hello from get /path-02 | service-a (1.0.0) | service-a-deployment-66d47877b-vhdxb
-[INFO] Hello from get /path-01 | service-a (1.0.0) | service-a-deployment-66d47877b-vhdxb
-[INFO] Hello from get /path-02 | service-a (1.0.0) | service-a-deployment-66d47877b-vhdxb
+[INFO] Hello from get /path-01 | service-a (1.0.0) | service-a-deployment-5df87cc6bd-swz29
+[INFO] Hello from get /path-02 | service-a (1.0.0) | service-a-deployment-5df87cc6bd-swz29
+[INFO] Hello from get /path-01 | service-a (1.0.0) | service-a-deployment-5df87cc6bd-swz29
+[INFO] Hello from get /path-02 | service-a (1.0.0) | service-a-deployment-5df87cc6bd-swz29
 ...
-[INFO] Hello from get /path-01 | service-a (1.0.0) | service-a-deployment-66d47877b-vhdxb
-[INFO] Hello from get /path-02 | service-a (1.0.0) | service-a-deployment-66d47877b-vhdxb
-[INFO]
-[INFO]
-...
-[INFO]
+[INFO] Hello from get /path-01 | service-a (1.0.0) | service-a-deployment-5df87cc6bd-swz29
+[INFO] Hello from get /path-02 | service-a (1.0.0) | service-a-deployment-5df87cc6bd-swz29
 ```
 </details>
 
 ```
-$ kubectl delete pod client-x-deployment-59f9767657-g7vhc -n demo-01
+$ kubectl delete pod client-x-deployment-859f4b448f-8vwrw -n demo-01
 ```
 <details><summary>Output the command</summary>
 
 ```
-pod "client-x-deployment-59f9767657-g7vhc" deleted
+pod "client-x-deployment-859f4b448f-8vwrw" deleted
+```
+</details>
+
+```
+$ kubectl delete pod service-a-deployment-5df87cc6bd-swz29 -n demo-01
+```
+<details><summary>Output the command</summary>
+
+```
+pod "service-a-deployment-5df87cc6bd-swz29" deleted
 ```
 </details>
 
@@ -231,13 +221,13 @@ $ kubectl get pods -n demo-01
 
 ```
 NAME                                    READY   STATUS    RESTARTS   AGE
-client-x-deployment-6dc67f6bdf-g7rgn    2/2     Running   0          4s
-service-a-deployment-5df87cc6bd-txknm   2/2     Running   0          49s
+client-x-deployment-859f4b448f-mh7f2    2/2     Running   0          117s
+service-a-deployment-5df87cc6bd-cwq56   2/2     Running   0          67s
 ```
 </details>
 
 ```
-$ kubectl logs client-x-deployment-6dc67f6bdf-g7rgn client-x -n demo-01 | tail
+$ kubectl logs client-x-deployment-859f4b448f-mh7f2 client-x -n demo-01 | tail
 ```
 <details><summary>Output the command</summary>
 
@@ -246,10 +236,7 @@ $ kubectl logs client-x-deployment-6dc67f6bdf-g7rgn client-x -n demo-01 | tail
 [INFO]
 [INFO]
 [INFO]
-[INFO]
-[INFO]
-[INFO]
-[INFO]
+...
 [INFO]
 [INFO]
 ```
@@ -325,7 +312,7 @@ allow-client-x-to-service-a   136m
 </details>
 
 ```
-$ kubectl logs client-x-deployment-6dc67f6bdf-g7rgn client-x -n demo-01 | tail
+$ kubectl logs client-x-deployment-859f4b448f-mh7f2 client-x -n demo-01 | tail
 ```
 <details><summary>Output the command</summary>
 
@@ -393,6 +380,10 @@ spec:
 ```
 $ kubectl apply -f traffic.L7.yaml
 ```
+or
+```
+$ kubectl apply -f https://raw.githubusercontent.com/patricekrakow/learning-stuff/master/playing-with-OSM/traffic.L7.yaml
+```
 <details><summary>Output the command</summary>
 
 ```
@@ -402,7 +393,7 @@ traffictarget.access.smi-spec.io/allow-client-x-to-service-a created
 </details>
 
 ```
-$ kubectl logs client-x-deployment-6dc67f6bdf-g7rgn client-x -n demo-01 | tail
+$ kubectl logs client-x-deployment-859f4b448f-mh7f2 client-x -n demo-01 | tail
 ```
 <details><summary>Output the command</summary>
 
