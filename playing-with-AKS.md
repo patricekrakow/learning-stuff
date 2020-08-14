@@ -1,5 +1,24 @@
 # Playing with Azure Kubernetes Service (AKS)
 
+## TL;DR
+
+If you have already created a Kubernetes cluster following this page, you can redo it quickly using the following commands (I have removed the one-off actions):
+
+```
+$ az group create --name group-01 --location westeurope
+$ az aks create --resource-group group-01 --name cluster-01 --node-count 3 --enable-addons monitoring --generate-ssh-keys
+$ az aks create --resource-group group-01 --name cluster-01 --node-count 3 --enable-addons monitoring --generate-ssh-keys
+$ kubectl version --short
+$ kubectl get nodes
+```
+
+And, don't forget to save money by delete the cluster and all related cluster when you do not need them anymore.
+```
+$ az group delete --name group-01 --yes
+```
+
+> **_WARNING:_** AKS might create other _resource groups_ when creating the Kubernetes cluster, you MUST also delete them to save money!
+
 ## Create a Kubernetes Cluster with AKS
 
 1\. Go to <https://shell.azure.com>.
