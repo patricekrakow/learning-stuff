@@ -1,5 +1,11 @@
 # Playing with Microsoft Open Service Mesh (OSM)
 
+## Prerequisite(s)
+
+You must have a running _Kubernetes_ cluster, and an access to it via the `kubectl` CLI. You can follow one of these documents to get a proper environment:
+* [Playing with Minikube](https://github.com/patricekrakow/learning-stuff/blob/master/playing-with-Minikube.md)
+* [Playing with Azure Kubernetes Service (AKS)](https://github.com/patricekrakow/learning-stuff/blob/master/playing-with-AKS.md)
+
 ## Set up the OSM CLI
 
 1\. Download platform specific compressed package from the [Releases page](https://github.com/openservicemesh/osm/releases) using the following command:
@@ -87,6 +93,7 @@ zipkin-5dbc54795f-pnbmm          1/1     Running   0          43s
 ```
 $ kubectl apply -f https://raw.githubusercontent.com/patricekrakow/learning-microservices/master/demo/service-a~v1.0.0/service-a.yaml
 ```
+> **_WARNING:_** OSM requires the `name` of the `Service` to match the value of the `app` label; it's a bug, see [Issue #1524](https://github.com/openservicemesh/osm/issues/1524).
 <details><summary>Output the command</summary>
 
 ```
@@ -101,6 +108,8 @@ deployment.apps/service-a-deployment created
 ```
 $ kubectl apply -f https://raw.githubusercontent.com/patricekrakow/learning-microservices/master/demo/client-x~v1.0.0/client-x.yaml
 ```
+> **_WARNING:_** OSM requires the `name` of the `Service` to match the value of the `app` label; it's a bug, see [Issue #1524](https://github.com/openservicemesh/osm/issues/1524).
+
 <details><summary>Output the command</summary>
 
 ```
@@ -278,6 +287,8 @@ spec:
     namespace: demo-01
 ```
 
+> **_WARNING:_** OSM does not support yet `TCPRoute`, see [Issue #1521](https://github.com/openservicemesh/osm/issues/1521).
+
 ```
 $ kubectl apply -f traffic.L4.yaml
 ```
@@ -316,7 +327,7 @@ $ kubectl logs client-x-deployment-859f4b448f-mh7f2 client-x -n demo-01 | tail
 ```
 <details><summary>Output the command</summary>
 
-**It does NOT work :-(**
+> **_WARNING:_** OSM does not support yet `TCPRoute`, see [Issue #1521](https://github.com/openservicemesh/osm/issues/335).
 ```
 [INFO]
 [INFO]
@@ -397,18 +408,14 @@ $ kubectl logs client-x-deployment-859f4b448f-mh7f2 client-x -n demo-01 | tail
 ```
 <details><summary>Output the command</summary>
 
-**It does NOT work :-(**
 ```
-[INFO]
-[INFO]
-[INFO]
-[INFO]
-[INFO]
-[INFO]
-[INFO]
-[INFO]
-[INFO]
-[INFO]
+[INFO] Hello from get /path-01 | service-a (1.0.0) | service-a-deployment-5df87cc6bd-q8n7p
+[INFO] Hello from get /path-02 | service-a (1.0.0) | service-a-deployment-5df87cc6bd-q8n7p
+[INFO] Hello from get /path-01 | service-a (1.0.0) | service-a-deployment-5df87cc6bd-q8n7p
+[INFO] Hello from get /path-02 | service-a (1.0.0) | service-a-deployment-5df87cc6bd-q8n7p
+...
+[INFO] Hello from get /path-01 | service-a (1.0.0) | service-a-deployment-5df87cc6bd-q8n7p
+[INFO] Hello from get /path-02 | service-a (1.0.0) | service-a-deployment-5df87cc6bd-q8n7p
 ```
 </details>
 
