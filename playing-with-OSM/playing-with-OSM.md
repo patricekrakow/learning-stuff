@@ -6,7 +6,18 @@ You must have a running _Kubernetes_ cluster, and an access to it via the `kubec
 * [Playing with Minikube](https://github.com/patricekrakow/learning-stuff/blob/master/playing-with-Minikube.md)
 * [Playing with Azure Kubernetes Service (AKS)](https://github.com/patricekrakow/learning-stuff/blob/master/playing-with-AKS.md)
 
-## Set up the OSM CLI
+```
+$ kubectl version --short
+```
+<details><summary>Output the command</summary>
+
+```
+Client Version: v1.16.0
+Server Version: v1.16.13
+```
+</details>
+
+## Install the OSM CLI
 
 1\. Download platform specific compressed package from the [Releases page](https://github.com/openservicemesh/osm/releases) using the following command:
 ```
@@ -47,7 +58,7 @@ LICENSE  osm  README.md
 ```
 </details>
 
-3\. Add the `osm` binary to `$PATH` using the following command:
+3\. Add the OSM CLI to your path using the following command:
 ```
 $ export PATH="$HOME/linux-amd64:$PATH"
 $ osm version
@@ -432,3 +443,7 @@ $ kubectl logs client-x-deployment-859f4b448f-mh7f2 client-x -n demo-01 | tail
 <https://github.com/openservicemesh/osm/blob/main/DESIGN.md>
 
 <https://groups.google.com/g/openservicemesh/c/KdprhUJvKUE>
+
+<https://github.com/openservicemesh/osm/issues/1521>
+
+<https://github.com/openservicemesh/osm/issues/1524>
