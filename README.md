@@ -12,3 +12,7 @@ Let's have one repository with all my learning experiences:
 [Playing with OPA](playing-with-OPA.md) | The Open Policy Agent (OPA, pronounced “oh-pa”) is an open source, general-purpose policy engine that unifies policy enforcement across the stack.
 
 [Playing with OSM](playing-with-OSM/playing-with-OSM.md) | Open Service Mesh (OSM) is a lightweight and extensible cloud native service mesh.
+
+[Playing with Linkerd](playing-with-OSM/playing-with-Linkerd.md) | Zero-trust multi-cluster Kubernetes. Fast, simple, and open source. Linkerd adds critical security, observability, and reliability features to your Kubernetes stack—no code change required.
+
+[Playing with Go](playing-with-Go.md) | Go is an open source programming language that makes it easy to build simple, reliable, and efficient software.
