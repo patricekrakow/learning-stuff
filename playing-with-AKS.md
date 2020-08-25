@@ -4,7 +4,7 @@
 
 If you have already created a Kubernetes cluster following this page, you can redo it quickly using the following commands (I have removed the one-off actions):
 
-```
+```text
 $ az group create --name group-01 --location westeurope
 $ az aks create --resource-group group-01 --name cluster-01 --node-count 3 --enable-addons monitoring --generate-ssh-keys
 $ az aks get-credentials --resource-group group-01 --name cluster-01
@@ -13,7 +13,8 @@ $ kubectl get nodes
 ```
 
 And, don't forget to save money by delete the cluster and all related cluster when you do not need them anymore.
-```
+
+```text
 $ az group delete --name group-01 --yes
 ```
 
@@ -23,14 +24,36 @@ $ az group delete --name group-01 --yes
 
 1\. Go to <https://shell.azure.com>.
 
-2\. Choose the _location_ where you want to create your Kubernetes cluster using the following command:
+2\. Check that the `az` CLI is properly installed:
 
+```text
+$ az version
 ```
-$ az account list-locations | jq .[].name
-```
+
 <details><summary>Output the command</summary>
 
+```json
+{
+  "azure-cli": "2.10.1",
+  "azure-cli-command-modules-nspkg": "2.0.3",
+  "azure-cli-core": "2.10.1",
+  "azure-cli-nspkg": "3.0.4",
+  "azure-cli-telemetry": "1.0.4",
+  "extensions": {}
+}
 ```
+
+</details>
+
+2\. Choose the _location_ where you want to create your Kubernetes cluster using the following command:
+
+```text
+$ az account list-locations | jq .[].name
+```
+
+<details><summary>Output the command</summary>
+
+```text
 "eastus"
 "eastus2"
 "southcentralus"
@@ -40,14 +63,17 @@ $ az account list-locations | jq .[].name
 "francecentral"
 ...
 ```
+
 </details>
 
 3\. Create an Azure _resource group_ called `group-01` using the following command:
 
-```
+```text
 $ az group create --name group-01 --location westeurope
 ```
+
 eventually replacing the value `westeurope` by another value of your choice coming from the previous command.
+
 <details><summary>Output the command</summary>
 
 ```json
@@ -69,59 +95,67 @@ eventually replacing the value `westeurope` by another value of your choice comi
 
 First, let's check _Microsoft.OperationsManagement_ using the following command:
 
-```
+```text
 $ az provider show -n Microsoft.OperationsManagement -o table
 ```
+
 <details><summary>Output the command</summary>
 
-```
+```text
 Namespace                       RegistrationPolicy    RegistrationState
 ------------------------------  --------------------  -------------------
 Microsoft.OperationsManagement  RegistrationRequired  NotRegistered
 ```
+
 </details>
 
 If it shows (as above) that the _Microsoft.OperationsManagement_ is not registered on your subscription, you can register it using the following command:
 
-```
+```text
 $ az provider register --namespace Microsoft.OperationsManagement
 ```
+
 <details><summary>Output the command</summary>
 
-```
+```text
 Registering is still on-going. You can monitor using 'az provider show -n Microsoft.OperationsManagement'
 ```
+
 </details>
 
 Second, let's check _Microsoft.OperationalInsights_ using the following command:
 
-```
+```text
 $ az provider show -n Microsoft.OperationalInsights -o table
 ```
+
 <details><summary>Output the command</summary>
 
-```
+```text
 Namespace                      RegistrationPolicy    RegistrationState
 -----------------------------  --------------------  -------------------
 Microsoft.OperationalInsights  RegistrationRequired  NotRegistered
 ```
+
 </details>
 
 If it shows (as above) that the _Microsoft.OperationalInsights_ is not registered on your subscription, you can register it using the following command:
 
-```
+```text
 $ az provider register --namespace Microsoft.OperationalInsights
 ```
+
 <details><summary>Output the command</summary>
 
-```
+```text
 Registering is still on-going. You can monitor using 'az provider show -n Microsoft.OperationalInsights'
 ```
+
 </details>
 
 5\. We can know actually create a Kubernetes cluster called `cluster-01` using the following command:
 
-```
+```text
 $ az aks create --resource-group group-01 --name cluster-01 --node-count 3 --enable-addons monitoring --generate-ssh-keys
 ```
 
@@ -245,35 +279,42 @@ After a few minutes, the command completes and returns JSON-formatted informatio
 
 1\. Let's first verify that `kubectl` is properly installed using the following command:
 
-```
+```text
 $ kubectl version --short
 ```
+
 <details><summary>Output the command</summary>
 
-```
+```text
 Client Version: v1.16.0
 error: You must be logged in to the server (the server has asked for the client to provide credentials)
 ```
+
 </details>
 
 2\. Download credentials and configures the Kubernetes CLI to use them with the following command:
-```
+
+```text
 $ az aks get-credentials --resource-group group-01 --name cluster-01
 ```
+
 <details><summary>Output the command</summary>
 
-```
+```text
 Merged "cluster-01" as current context in /home/patrice/.kube/config
 ```
+
 </details>
 
 3\. Verify the connection to the cluster using the following command:
-```
+
+```text
 $ kubectl get nodes
 ```
+
 <details><summary>Output the command</summary>
 
-```
+```text
 NAME                                STATUS   ROLES   AGE   VERSION
 aks-nodepool1-14300836-vmss000000   Ready    agent   22m   v1.16.10
 aks-nodepool1-14300836-vmss000001   Ready    agent   21m   v1.16.10
@@ -284,9 +325,12 @@ aks-nodepool1-14300836-vmss000002   Ready    agent   22m   v1.16.10
 ## Delete the Cluster
 
 1\. To avoid Azure charges, you should delete the cluster as soon as you don't need it anymore using the following command:
-```
+
+```text
 $ az group delete --name group-01 --yes
 ```
+
+> **_WARNING:_** AKS might create other _resource groups_ when creating the Kubernetes cluster, you MUST also delete them to save money!
 
 ## References
 
