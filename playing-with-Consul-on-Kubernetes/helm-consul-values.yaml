@@ -1,0 +1,24 @@
+# helm-consul-values.yaml
+---
+global:
+  datacenter: consul-dc-01
+  acls:
+    manageSystemACLs: true
+
+ui:
+  service:
+    type: 'LoadBalancer'
+
+connectInject:
+  enabled: true
+
+syncCatalog:
+  enabled: true
+
+client:
+  enabled: true
+  grpc: true
+
+server:
+  replicas: 3
+  bootstrapExpect: 3

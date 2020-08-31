@@ -19,11 +19,9 @@ helm repo add hashicorp https://helm.releases.hashicorp.com
 helm search repo hashicorp/consul
 ```
 
-```text
-touch helm-consul-values.yaml
-```
-
 ```yaml
+# helm-consul-values.yaml
+---
 global:
   datacenter: consul-dc-01
   acls:
@@ -203,5 +201,7 @@ $ kubectl logs client-x-version-1-0-1-deployment-7dbc66df47-whsdj client-x | tai
 ## References
 
 <https://www.consul.io/docs/k8s/installation/overview>
+
 <https://www.consul.io/docs/k8s/helm>
+
 <https://learn.hashicorp.com/consul/gs-consul-service-mesh/deploy-consul-service-mesh>
