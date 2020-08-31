@@ -16,3 +16,5 @@ Let's have one repository with all my learning experiences:
 [Playing with Linkerd](playing-with-OSM/playing-with-Linkerd.md) | Zero-trust multi-cluster Kubernetes. Fast, simple, and open source. Linkerd adds critical security, observability, and reliability features to your Kubernetes stack—no code change required.
 
 [Playing with Go](playing-with-Go.md) | Go is an open source programming language that makes it easy to build simple, reliable, and efficient software.
+
+[Playing with Consul on Kubernetes](playing-with-Consul-on-Kubernetes/playing-with-Consul-on-Kubernetes.md) | Consul Connect creates a consistent platform for modern application networking and security with identity based authorization, L7 traffic management, and service-to-service encryption.

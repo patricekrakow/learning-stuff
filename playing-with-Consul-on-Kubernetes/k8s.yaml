@@ -1,0 +1,72 @@
+---
+# Deploy 'service-a' Service Account
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: service-a
+---
+# Deploy 'service-a-version-1-0-0-deployment' Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-a-version-1-0-0-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-a
+      version: 1.0.0
+  template:
+    metadata:
+      labels:
+        app: service-a
+        version: 1.0.0
+        api: acme-api
+      annotations:
+        "consul.hashicorp.com/connect-inject": "true"
+        "consul.hashicorp.com/connect-service": "service-a"
+        "consul.hashicorp.com/connect-service-port": "service-a-port"
+    spec:
+      ## If ACLs are enabled, the serviceAccountName must match the Consul service name.
+      serviceAccountName: service-a
+      containers:
+      - name: service-a
+        image: patrice1972/service-a:1.0.0
+        ports:
+        - name: service-a-port
+          protocol: TCP
+          containerPort: 3000
+---
+# Deploy 'client-x' Service Account
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: client-x
+---
+# Deploy 'client-x-version-1-0-1-deployment' Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-x-version-1-0-1-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: client-x
+      version: 1.0.1
+  template:
+    metadata:
+      labels:
+        app: client-x
+        version: 1.0.1
+      annotations:
+        "consul.hashicorp.com/connect-inject": "true"
+        "consul.hashicorp.com/connect-service-upstreams": "service-a:3000"
+    spec:
+      serviceAccountName: client-x
+      containers:
+      - name: client-x
+        image: patrice1972/client-x:1.0.1
+        env:
+        - name: API_HOST
+          value: "localhost"
