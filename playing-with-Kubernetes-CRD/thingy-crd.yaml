@@ -4,7 +4,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   # name must match the spec fields below, and be in the form: <plural>.<group>
-  name: thingy.stable.patricelabs.com
+  name: thingies.stable.patricelabs.com
 spec:
   # group name to use for REST API: /apis/<group>/<version>
   group: stable.patricelabs.com
@@ -19,10 +19,13 @@ spec:
         openAPIV3Schema:
           type: object
           properties:
-            name:
-              type:string
-            value:
-              type: string
+            spec:
+              type: object
+              properties:
+                name:
+                  type: string
+                value:
+                  type: string
   # either Namespaced or Cluster
   scope: Namespaced
   names:

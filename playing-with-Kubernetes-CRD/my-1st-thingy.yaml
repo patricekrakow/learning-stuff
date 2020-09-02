@@ -1,0 +1,9 @@
+# my-1st-thingy.yaml
+---
+apiVersion: "stable.patricelabs.com/v1"
+kind: Thingy
+metadata:
+  name: my-1st-thingy
+spec:
+  name: message
+  value: Hello World!
