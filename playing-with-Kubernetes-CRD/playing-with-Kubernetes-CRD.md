@@ -6,7 +6,6 @@ You need to have a running Kubernetes cluster with an access to it via the `kube
 
 ```text
 $ launch.sh
-$ kubectl version
 Waiting for Kubernetes to start...
 Kubernetes started
 ```
