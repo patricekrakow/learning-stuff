@@ -1,5 +1,42 @@
 # Playing with Kubernetes CustomResourceDefinitions (CRDs)
 
+## Prerequisites
+
+You need to have have a running Kubernetes cluster with an access to it via the `kubectl` CLI to be able the run the demo. If you don't have one, you can easily use the following Katacoda Scenario: <https://www.katacoda.com/patrice1972/scenarios/hello-world>. Just click on the _START SCENARIO_ button and type the following command:
+
+```text
+$ launch.sh
+$ kubectl version
+Waiting for Kubernetes to start...
+Kubernetes started
+```
+
+You can eventually verify the installation with the following command:
+
+```text
+$ $ kubectl version --short
+Client Version: v1.18.0
+Server Version: v1.18.0
+```
+
+And finally, you can install the demo with the following commands:
+
+```text
+$ git clone https://github.com/patricekrakow/learning-stuff.git
+Cloning into 'learning-stuff'...
+remote: Enumerating objects: 137, done.
+remote: Counting objects: 100% (137/137), done.
+remote: Compressing objects: 100% (103/103), done.
+remote: Total 137 (delta 72), reused 86 (delta 32), pack-reused 0
+Receiving objects: 100% (137/137), 35.95 KiB | 566.00 KiB/s, done.
+Resolving deltas: 100% (72/72), done.
+$ cd learning-stuff/playing-with-Kubernetes-CRD/
+```
+
+**_Remark_**. I will, of course, soon propose/automate these steps via the Katacoda scenario.
+
+## Demo
+
 _Custom resources_ are extensions of the Kubernetes API.
 
 Let's define a new _resource_ called `Thingy`. A `Thingy` _object_ will have two properties: `name` and `value`.
