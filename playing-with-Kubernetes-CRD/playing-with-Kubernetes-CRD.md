@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-You need to have have a running Kubernetes cluster with an access to it via the `kubectl` CLI to be able the run the demo. If you don't have one, you can easily use the following Katacoda Scenario: <https://www.katacoda.com/patrice1972/scenarios/hello-world>. Just click on the _START SCENARIO_ button and type the following command:
+You need to have a running Kubernetes cluster with an access to it via the `kubectl` CLI to be able the run the demo. If you don't have one, you can easily use the following Katacoda Scenario: <https://www.katacoda.com/patrice1972/scenarios/hello-world>. Just click on the _START SCENARIO_ button and type the following command:
 
 ```text
 $ launch.sh
