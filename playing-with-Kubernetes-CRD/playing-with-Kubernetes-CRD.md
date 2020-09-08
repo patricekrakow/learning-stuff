@@ -13,7 +13,7 @@ Kubernetes started
 You can eventually verify the installation with the following command:
 
 ```text
-$ $ kubectl version --short
+$ kubectl version --short
 Client Version: v1.18.0
 Server Version: v1.18.0
 ```
