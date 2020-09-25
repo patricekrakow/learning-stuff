@@ -1,0 +1,89 @@
+---
+# Deploy 'demo' Namespace
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: demo
+---
+# Deploy 'service-a' Service Account
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: service-a
+  namespace: demo
+---
+# Deploy 'service-a-v1-0-0-deployment' Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-a-v1-0-0-deployment
+  namespace: demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-a
+      version: 1.0.0
+      api: acme-api
+  template:
+    metadata:
+      labels:
+        app: service-a
+        version: 1.0.0
+        api: acme-api
+    spec:
+      serviceAccountName: service-a
+      containers:
+      - name: service-a
+        image: patrice1972/service-a:1.0.0
+        ports:
+        - name: service-a-port
+          protocol: TCP
+          containerPort: 3000
+---
+# Deploy 'acme-api' Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: acme-api
+  namespace: demo
+spec:
+  selector:
+    api: acme-api
+  ports:
+  - protocol: TCP
+    port: 3000
+    targetPort: 3000
+---
+# Deploy 'client-u' Service Account
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: client-u
+  namespace: demo
+---
+# Deploy 'client-u-v1-0-0-deployment' Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-u-v1-0-0-deployment
+  namespace: demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: client-u
+      version: 1.0.0
+  template:
+    metadata:
+      labels:
+        app: client-u
+        version: 1.0.0
+    spec:
+      serviceAccountName: client-u
+      containers:
+      - name: client-u
+        image: patrice1972/client-u:1.0.0
+        env:
+        - name: API_HOST
+          value: "acme-api.demo"
