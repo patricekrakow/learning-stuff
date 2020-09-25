@@ -1,0 +1,13 @@
+{
+  "name": "service-a",
+  "version": "1.0.0",
+  "description": "Implementation of the Alpha API (1.0.0)",
+  "author": "Patrice Krakow <patrice.krakow@gmail.com>",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

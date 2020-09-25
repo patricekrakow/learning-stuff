@@ -1,24 +1,24 @@
 # traffic.L4.yaml
 ---
-# Deploy the 'tcp-route' TCPRoute
+#TCPRoute: tcp-route
 apiVersion: specs.smi-spec.io/v1alpha3
 kind: TCPRoute
 metadata:
   name: tcp-route
-  namespace: demo-01
+  namespace: demo
 spec: {}
 ---
-# Deploy the 'allow-client-x-to-service-a' TrafficTarget
+# TrafficTarget: allow-client-x-to-service-a
 kind: TrafficTarget
 apiVersion: access.smi-spec.io/v1alpha2
 metadata:
   name: allow-client-x-to-service-a
-  namespace: demo-01
+  namespace: demo
 spec:
   destination:
     kind: ServiceAccount
     name: service-a
-    namespace: demo-01
+    namespace: demo
     port: 3000
   rules:
   - kind: TCPRoute
@@ -26,4 +26,4 @@ spec:
   sources:
   - kind: ServiceAccount
     name: client-x
-    namespace: demo-01
+    namespace: demo

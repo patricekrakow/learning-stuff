@@ -1,0 +1,89 @@
+---
+# Namespace: demo
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: demo
+---
+# Service Account: service-a
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: service-a
+  namespace: demo
+---
+# Deployment: service-a-v1-0-0-deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-a-v1-0-0-deployment
+  namespace: demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-a
+      version: 1.0.0
+      host: acme-api
+  template:
+    metadata:
+      labels:
+        app: service-a
+        version: 1.0.0
+        host: acme-api
+    spec:
+      serviceAccountName: service-a
+      containers:
+      - name: service-a
+        image: patrice1972/osm-service-a:1.0.0
+        ports:
+        - name: service-a-port
+          protocol: TCP
+          containerPort: 3000
+---
+# Service: acme-api
+apiVersion: v1
+kind: Service
+metadata:
+  name: acme-api
+  namespace: demo
+spec:
+  selector:
+    host: acme-api
+  ports:
+  - protocol: TCP
+    port: 3000
+    targetPort: 3000
+---
+# Service Account: client-x
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: client-x
+  namespace: demo
+---
+# Deployment: client-x-v1-0-0-deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-x-v1-0-0-deployment
+  namespace: demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: client-x
+      version: 1.0.0
+  template:
+    metadata:
+      labels:
+        app: client-x
+        version: 1.0.0
+    spec:
+      serviceAccountName: client-x
+      containers:
+      - name: client-x
+        image: patrice1972/osm-client-x:1.0.0
+        env:
+        - name: API_HOST
+          value: "acme-api.demo"

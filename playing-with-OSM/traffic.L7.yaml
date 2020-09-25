@@ -1,41 +1,36 @@
 # traffic.L7.yaml
 ---
-# Deploy the 'service-a-routes' HTTPRouteGroup
+# HTTPRouteGroup: alpha-api-routes
 apiVersion: specs.smi-spec.io/v1alpha3
 kind: HTTPRouteGroup
 metadata:
-  name: service-a-routes
-  namespace: demo-01
+  name: alpha-api-routes
+  namespace: demo
 spec:
   matches:
   - name: get-path-01
     pathRegex: /path-01
     methods:
     - GET
-  - name: get-path-02
-    pathRegex: /path-02
-    methods:
-    - GET
 ---
-# Deploy the 'allow-client-x-to-service-a' TrafficTarget
+# TrafficTarget: allow-client-x-to-service-a-through-alpha-api-routes
 kind: TrafficTarget
 apiVersion: access.smi-spec.io/v1alpha2
 metadata:
-  name: allow-client-x-to-service-a
-  namespace: demo-01
+  name: allow-client-x-to-service-a-through-alpha-api-routes
+  namespace: demo
 spec:
   destination:
     kind: ServiceAccount
     name: service-a
-    namespace: demo-01
+    namespace: demo
     port: 3000
   rules:
   - kind: HTTPRouteGroup
-    name: service-a-routes
+    name: alpha-api-routes
     matches:
     - get-path-01
-    - get-path-02
   sources:
   - kind: ServiceAccount
     name: client-x
-    namespace: demo-01
+    namespace: demo
