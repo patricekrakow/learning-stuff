@@ -1,8 +1,9 @@
+---
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
- name: allow-client-x-to-service-a-through-alpha-api-routes
- namespace: demo
+  name: allow-client-x-to-service-a-through-alpha-api-routes
+  namespace: istio-demo
 spec:
   selector:
     matchLabels:
@@ -15,6 +16,6 @@ spec:
         paths: ["/path-01"]
   - from:
     - source:
-        principals: ["cluster.local/ns/demo/sa/client-u"]
+        principals: ["cluster.local/ns/istio-demo/sa/client-u"]
     - source:
-        namespaces: ["demo"]
+        namespaces: ["istio-demo"]

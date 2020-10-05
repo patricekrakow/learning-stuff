@@ -35,7 +35,7 @@ spec:
       serviceAccountName: service-a
       containers:
       - name: service-a
-        image: patrice1972/isio-demo-service-a:1.0.0
+        image: patrice1972/demo-service-a:1.0.0
         ports:
         - name: service-a-port
           protocol: TCP
@@ -83,7 +83,7 @@ spec:
       serviceAccountName: client-x
       containers:
       - name: client-x
-        image: patrice1972/istio-demo-client-x:1.0.0
+        image: patrice1972/demo-client-x:1.0.0
         env:
         - name: API_HOST
           value: "acme-api.istio-demo"
