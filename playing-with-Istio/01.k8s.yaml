@@ -1,89 +1,89 @@
 ---
-# Deploy 'demo' Namespace
+# Namespace: istio-demo
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: demo
+  name: istio-demo
 ---
-# Deploy 'service-a' Service Account
+# Service Account: service-a
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: service-a
-  namespace: demo
+  namespace: istio-demo
 ---
-# Deploy 'service-a-v1-0-0-deployment' Deployment
+# Deployment: service-a-v1-0-0-deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: service-a-v1-0-0-deployment
-  namespace: demo
+  namespace: istio-demo
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: service-a
       version: 1.0.0
-      api: acme-api
+      host: acme-api
   template:
     metadata:
       labels:
         app: service-a
         version: 1.0.0
-        api: acme-api
+        host: acme-api
     spec:
       serviceAccountName: service-a
       containers:
       - name: service-a
-        image: patrice1972/service-a:1.0.0
+        image: patrice1972/isio-demo-service-a:1.0.0
         ports:
         - name: service-a-port
           protocol: TCP
           containerPort: 3000
 ---
-# Deploy 'acme-api' Service
+# Service: acme-api
 apiVersion: v1
 kind: Service
 metadata:
   name: acme-api
-  namespace: demo
+  namespace: istio-demo
 spec:
   selector:
-    api: acme-api
+    host: acme-api
   ports:
   - protocol: TCP
     port: 3000
     targetPort: 3000
 ---
-# Deploy 'client-u' Service Account
+# Service Account: client-x
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: client-u
-  namespace: demo
+  name: client-x
+  namespace: istio-demo
 ---
-# Deploy 'client-u-v1-0-0-deployment' Deployment
+# Deployment: client-x-v1-0-0-deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: client-u-v1-0-0-deployment
-  namespace: demo
+  name: client-x-v1-0-0-deployment
+  namespace: istio-demo
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: client-u
+      app: client-x
       version: 1.0.0
   template:
     metadata:
       labels:
-        app: client-u
+        app: client-x
         version: 1.0.0
     spec:
-      serviceAccountName: client-u
+      serviceAccountName: client-x
       containers:
-      - name: client-u
-        image: patrice1972/client-u:1.0.0
+      - name: client-x
+        image: patrice1972/istio-demo-client-x:1.0.0
         env:
         - name: API_HOST
-          value: "acme-api.demo"
+          value: "acme-api.istio-demo"
