@@ -31,7 +31,7 @@ no running Istio pods in "istio-system"
 2\. Install Istio control plane within the Kubernetes cluster:
 
 ```text
-$ istioctl install --set profile=minimal
+$ istioctl install --set profile=default
 ✔ Istio core installed
 ✔ Istiod installed
 ✔ Installation complete
