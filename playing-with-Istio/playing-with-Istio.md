@@ -20,22 +20,24 @@ Server Version: v1.17.11
 ```text
 $ curl -L https://istio.io/downloadIstio | sh -
 $ ls
-...  istio-1.7.3 ...
-$ cd istio-1.7.3
+...  istio-1.7.4 ...
+$ cd istio-1.7.4/
 $ export PATH=$PWD/bin:$PATH
+$ cd ..
 $ istioctl version
 no running Istio pods in "istio-system"
-1.7.3
+1.7.4
 ```
 
 2\. Install Istio control plane within the Kubernetes cluster:
 
 ```text
-$ istioctl install --set profile=default
+$ istioctl install --set profile=demo
 ✔ Istio core installed
 ✔ Istiod installed
+✔ Egress gateways installed
 ✔ Ingress gateways installed
-✔ Installation complete  
+✔ Installation complete
 ```
 
 3\. Verify the installation of Istio:
@@ -43,13 +45,29 @@ $ istioctl install --set profile=default
 ```text
 $ kubectl get pods --namespace istio-system
 NAME                                   READY   STATUS    RESTARTS   AGE
-istio-ingressgateway-5689f7c67-dcfs6   1/1     Running   0          2m2s
-istiod-5c6b7b5b8f-x7wn8                1/1     Running   0          2m20s
+istio-egressgateway-69c9745b7-gp6ks    1/1     Running   0          57s
+istio-ingressgateway-5cb9d7c76-bdm96   1/1     Running   0          57s
+istiod-68657c94b5-wtt7t                1/1     Running   0          75s
 ```
 
 ## Install and Run the Demo
 
-1\. Deploy the demonstration with Kubernetes manifests:
+1\. Get the manifests from GitHub:
+
+```text
+$ git clone https://github.com/patricekrakow/learning-stuff.git
+Cloning into 'learning-stuff'...
+remote: Enumerating objects: 227, done.
+remote: Counting objects: 100% (227/227), done.
+remote: Compressing objects: 100% (175/175), done.
+remote: Total 227 (delta 119), reused 140 (delta 48), pack-reused 0
+Receiving objects: 100% (227/227), 57.91 KiB | 0 bytes/s, done.
+Resolving deltas: 100% (119/119), done.
+Checking connectivity... done.
+$ cd learning-stuff/playing-with-Istio/
+```
+
+2\. Deploy the demonstration with Kubernetes manifests:
 
 ```text
 $ kubectl apply -f 01.demo.k8s.yaml
@@ -64,18 +82,18 @@ deployment.apps/client-x-v1-0-0-deployment created
 ```text
 $ kubectl get pods -n istio-demo
 NAME                                          READY   STATUS    RESTARTS   AGE
-client-x-v1-0-0-deployment-58cf88bcf5-xgqh4   1/1     Running   0          24s
-service-a-v1-0-0-deployment-994cf8fc8-j2stt   1/1     Running   0          24s
+client-x-v1-0-0-deployment-58cf88bcf5-smn57   1/1     Running   0          21s
+service-a-v1-0-0-deployment-994cf8fc8-srd67   1/1     Running   0          22s
 ```
 
 ```text
-$ kubectl logs client-x-v1-0-0-deployment-58cf88bcf5-xgqh4 -n istio-demo | tail
-[INFO] get /path-01 | Hello from get /path-01! | service-a (1.0.0) | service-a-v1-0-0-deployment-994cf8fc8-j2stt
-[INFO] get /path-01 | Hello from get /path-01! | service-a (1.0.0) | service-a-v1-0-0-deployment-994cf8fc8-j2stt
-[INFO] get /path-01 | Hello from get /path-01! | service-a (1.0.0) | service-a-v1-0-0-deployment-994cf8fc8-j2stt
+$ kubectl logs client-x-v1-0-0-deployment-58cf88bcf5-smn57 -n istio-demo | tail
+[INFO] get /path-01 | Hello from get /path-01! | service-a (1.0.0) | service-a-v1-0-0-deployment-994cf8fc8-srd67
+[INFO] get /path-01 | Hello from get /path-01! | service-a (1.0.0) | service-a-v1-0-0-deployment-994cf8fc8-srd67
+[INFO] get /path-01 | Hello from get /path-01! | service-a (1.0.0) | service-a-v1-0-0-deployment-994cf8fc8-srd67
 ...
-[INFO] get /path-01 | Hello from get /path-01! | service-a (1.0.0) | service-a-v1-0-0-deployment-994cf8fc8-j2stt
-[INFO] get /path-01 | Hello from get /path-01! | service-a (1.0.0) | service-a-v1-0-0-deployment-994cf8fc8-j2stt
+[INFO] get /path-01 | Hello from get /path-01! | service-a (1.0.0) | service-a-v1-0-0-deployment-994cf8fc8-srd67
+[INFO] get /path-01 | Hello from get /path-01! | service-a (1.0.0) | service-a-v1-0-0-deployment-994cf8fc8-srd67
 ```
 
 ## Onboard Services into the Mesh
@@ -87,25 +105,25 @@ namespace/istio-demo labeled
 
 ```text
 $ kubectl delete pods --all -n istio-demo
-pod "client-x-v1-0-0-deployment-58cf88bcf5-xgqh4" deleted
-pod "service-a-v1-0-0-deployment-994cf8fc8-j2stt" deleted
+pod "client-x-v1-0-0-deployment-58cf88bcf5-smn57" deleted
+pod "service-a-v1-0-0-deployment-994cf8fc8-srd67" deleted
 ```
 
 ```text
 $ kubectl get pods -n istio-demo
 NAME                                          READY   STATUS    RESTARTS   AGE
-client-x-v1-0-0-deployment-58cf88bcf5-nknl4   2/2     Running   0          79s
-service-a-v1-0-0-deployment-994cf8fc8-8b8xl   2/2     Running   0          79s
+client-x-v1-0-0-deployment-58cf88bcf5-mqp9s   2/2     Running   0          62s
+service-a-v1-0-0-deployment-994cf8fc8-wd9wg   2/2     Running   0          62s
 ```
 
 ```text
-$ kubectl logs client-x-v1-0-0-deployment-58cf88bcf5-nknl4 client-x -n istio-demo | tail
-[INFO] get /path-01 | Hello from get /path-01! | service-a (1.0.0) | service-a-v1-0-0-deployment-994cf8fc8-8b8xl
-[INFO] get /path-01 | Hello from get /path-01! | service-a (1.0.0) | service-a-v1-0-0-deployment-994cf8fc8-8b8xl
-[INFO] get /path-01 | Hello from get /path-01! | service-a (1.0.0) | service-a-v1-0-0-deployment-994cf8fc8-8b8xl
+$ kubectl logs client-x-v1-0-0-deployment-58cf88bcf5-mqp9s client-x -n istio-demo | tail
+[INFO] get /path-01 | Hello from get /path-01! | service-a (1.0.0) | service-a-v1-0-0-deployment-994cf8fc8-wd9wg
+[INFO] get /path-01 | Hello from get /path-01! | service-a (1.0.0) | service-a-v1-0-0-deployment-994cf8fc8-wd9wg
+[INFO] get /path-01 | Hello from get /path-01! | service-a (1.0.0) | service-a-v1-0-0-deployment-994cf8fc8-wd9wg
 ...
-[INFO] get /path-01 | Hello from get /path-01! | service-a (1.0.0) | service-a-v1-0-0-deployment-994cf8fc8-8b8xl
-[INFO] get /path-01 | Hello from get /path-01! | service-a (1.0.0) | service-a-v1-0-0-deployment-994cf8fc8-8b8xl
+[INFO] get /path-01 | Hello from get /path-01! | service-a (1.0.0) | service-a-v1-0-0-deployment-994cf8fc8-wd9wg
+[INFO] get /path-01 | Hello from get /path-01! | service-a (1.0.0) | service-a-v1-0-0-deployment-994cf8fc8-wd9wg
 ```
 
 ```text
@@ -115,7 +133,7 @@ authorizationpolicy.security.istio.io/deny-all created
 ```
 
 ```text
-$ kubectl logs client-x-v1-0-0-deployment-58cf88bcf5-nknl4 client-x -n istio-demo | tail
+$ kubectl logs client-x-v1-0-0-deployment-58cf88bcf5-mqp9s client-x -n istio-demo | tail
 [INFO] get /path-01 | 403
 [INFO] get /path-01 | 403
 [INFO] get /path-01 | 403
@@ -130,11 +148,11 @@ authorizationpolicy.security.istio.io/allow-client-x-to-service-a-through-alpha-
 ```
 
 ```text
-$ kubectl logs client-x-v1-0-0-deployment-58cf88bcf5-nknl4 client-x -n istio-demo | tail
-[INFO] get /path-01 | Hello from get /path-01! | service-a (1.0.0) | service-a-v1-0-0-deployment-994cf8fc8-8b8xl
-[INFO] get /path-01 | Hello from get /path-01! | service-a (1.0.0) | service-a-v1-0-0-deployment-994cf8fc8-8b8xl
-[INFO] get /path-01 | Hello from get /path-01! | service-a (1.0.0) | service-a-v1-0-0-deployment-994cf8fc8-8b8xl
+$ kubectl logs client-x-v1-0-0-deployment-58cf88bcf5-mqp9s client-x -n istio-demo | tail
+[INFO] get /path-01 | Hello from get /path-01! | service-a (1.0.0) | service-a-v1-0-0-deployment-994cf8fc8-wd9wg
+[INFO] get /path-01 | Hello from get /path-01! | service-a (1.0.0) | service-a-v1-0-0-deployment-994cf8fc8-wd9wg
+[INFO] get /path-01 | Hello from get /path-01! | service-a (1.0.0) | service-a-v1-0-0-deployment-994cf8fc8-wd9wg
 ...
-[INFO] get /path-01 | Hello from get /path-01! | service-a (1.0.0) | service-a-v1-0-0-deployment-994cf8fc8-8b8xl
-[INFO] get /path-01 | Hello from get /path-01! | service-a (1.0.0) | service-a-v1-0-0-deployment-994cf8fc8-8b8xl
+[INFO] get /path-01 | Hello from get /path-01! | service-a (1.0.0) | service-a-v1-0-0-deployment-994cf8fc8-wd9wg
+[INFO] get /path-01 | Hello from get /path-01! | service-a (1.0.0) | service-a-v1-0-0-deployment-994cf8fc8-wd9wg
 ```
