@@ -22,3 +22,5 @@ Let's have one repository with all my learning experiences:
 [Playing with Kubernetes CustomResourceDefinitions (CRDs)](playing-with-Kubernetes-CRD/playing-with-Kubernetes-CRD.md) | _Custom resources_ are extensions of the Kubernetes API.
 
 [Playing with Istio](playing-with-Istio/playing-with-Istio.md) | Connect, secure, control, and observe services.
+
+[Playing with Terraform](playing-with-Terraform/README.md) | Use Infrastructure as Code to provision and manage any cloud, infrastructure, or service.
