@@ -1,6 +1,6 @@
 # my-1st-thingy.yaml
 ---
-apiVersion: "stable.patricelabs.com/v1"
+apiVersion: "stable.patricelabs.io/v1"
 kind: Thingy
 metadata:
   name: my-1st-thingy

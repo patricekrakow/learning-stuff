@@ -47,10 +47,10 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   # name must match the spec fields below, and be in the form: <plural>.<group>
-  name: thingies.stable.patricelabs.com
+  name: thingies.stable.patricelabs.io
 spec:
   # group name to use for REST API: /apis/<group>/<version>
-  group: stable.patricelabs.com
+  group: stable.patricelabs.io
   # list of versions supported by this CustomResourceDefinition
   versions:
     - name: v1
@@ -86,13 +86,13 @@ spec:
 
 ```text
 $ kubectl apply -f thingy-crd.yaml
-customresourcedefinition.apiextensions.k8s.io/thingies.stable.patricelabs.com created
+customresourcedefinition.apiextensions.k8s.io/thingies.stable.patricelabs.io created
 ```
 
 ```yaml
 # my-1st-thingy.yaml
 ---
-apiVersion: "stable.patricelabs.com/v1"
+apiVersion: "stable.patricelabs.io/v1"
 kind: Thingy
 metadata:
   name: my-1st-thingy
@@ -103,7 +103,7 @@ spec:
 
 ```text
 $ kubectl apply -f my-1st-thingy.yaml
-thingy.stable.patricelabs.com/my-1st-thingy created
+thingy.stable.patricelabs.io/my-1st-thingy created
 ```
 
 ```text
@@ -117,13 +117,13 @@ $ kubectl describe thingy my-1st-thingy
 Name:         my-1st-thingy
 Namespace:    default
 Labels:       <none>
-Annotations:  API Version:  stable.patricelabs.com/v1
+Annotations:  API Version:  stable.patricelabs.io/v1
 Kind:         Thingy
 Metadata:
   Creation Timestamp:  2020-09-02T10:16:27Z
   Generation:          1
   Resource Version:    1615
-  Self Link:           /apis/stable.patricelabs.com/v1/namespaces/default/thingies/my-1st-thingy
+  Self Link:           /apis/stable.patricelabs.io/v1/namespaces/default/thingies/my-1st-thingy
   UID:                 cfb81060-a62b-4d10-a224-b0df9c0c9d7b
 Spec:
   Name:   message
