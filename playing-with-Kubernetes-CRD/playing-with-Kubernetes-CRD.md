@@ -126,6 +126,7 @@ Metadata:
   Self Link:           /apis/stable.patricelabs.io/v1/namespaces/default/thingies/my-1st-thingy
   UID:                 cfb81060-a62b-4d10-a224-b0df9c0c9d7b
 Spec:
+  Colour:  red
   Name:   message
   Value:  Hello World!
 Events:   <none>
